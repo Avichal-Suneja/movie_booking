@@ -50,6 +50,15 @@ class DatabaseService {
         .snapshots();
   }
 
+  Stream<QuerySnapshot<Map<String, dynamic>?>> getHallStreamWhere(
+      String collectionPath, String key, dynamic value) {
+    assert(collectionPath.isNotEmpty);
+    return firestore
+        .collection(collectionPath)
+        .where(key, arrayContains: value)
+        .snapshots();
+  }
+
   ///* GET stream of specified collection with multiple queries
   Stream<QuerySnapshot> getStreamWhereMultiple(
       String collectionPath, {

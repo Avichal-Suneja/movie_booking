@@ -13,8 +13,7 @@ class AuthService {
   User? currentUser = auth.currentUser;
 
   /// [Login with email and password]
-  Future<String> signInWithEmail(String email, String pass,
-      [bool admin = false]) async {
+  Future<String> signInWithEmail(String email, String pass) async {
     assert(email.isNotEmpty && pass.isNotEmpty);
     print('$email, $pass');
     String msg = '';
@@ -23,6 +22,7 @@ class AuthService {
     } on FirebaseAuthException catch (e) {
       log('$e');
       Get.rawSnackbar(title: 'Something Went Wrong!', message: '${e.code}');
+      msg = 'null';
     }
     return msg;
   }
@@ -69,7 +69,7 @@ class AuthService {
   }
 
   /// [Sign in completion using otp]
-  Future<User?> signInWithOtp(String smsCode) async {
+  Future<String?> signInWithOtp(String smsCode) async {
     User? user;
     try {
       if (GetPlatform.isWeb) {
@@ -77,7 +77,7 @@ class AuthService {
         await confirmationResult.confirm(smsCode);
         print(userCredential);
 
-        return userCredential.user;
+        return userCredential.user!.uid;
       }
       AuthCredential authCred;
       authCred = PhoneAuthProvider.credential(
@@ -85,7 +85,7 @@ class AuthService {
       user = (await FirebaseAuth.instance.signInWithCredential(authCred)).user!;
 
       print('User After Sign in With OTP: $user');
-      return user;
+      return user.uid;
     } catch (e) {
       Get.rawSnackbar(
           title: 'Error', message: '$e', duration: Duration(seconds: 5));
