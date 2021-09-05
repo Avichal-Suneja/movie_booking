@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie_booking/Modules/Authentication/auth_view.dart';
@@ -5,14 +6,17 @@ import 'package:movie_booking/Modules/Home/bindings/home_bindings.dart';
 import 'package:movie_booking/Modules/Home/views/halls_list_view.dart';
 import 'package:movie_booking/Modules/Home/views/movie_list_view.dart';
 import 'package:movie_booking/Modules/Home/views/seat_view.dart';
+import 'package:movie_booking/Services/auth_service.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
+  MyApp({Key? key}) : super(key: key);
+  final String initialPath = AuthService().currentUser==null? '/auth' : '/movie';
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -23,7 +27,7 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/hall', page: ()=> HallListView(), binding: HomeBinding()),
         GetPage(name: '/seat', page: ()=> SeatView(), binding: HomeBinding()),
       ],
-      initialRoute: '/auth',
+      initialRoute: initialPath,
     );
   }
 }

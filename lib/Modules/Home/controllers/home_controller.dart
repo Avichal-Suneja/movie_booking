@@ -9,14 +9,15 @@ class HomeController extends GetxController {
   DatabaseService _db = Get.find<DatabaseService>();
   AuthService _auth = Get.find<AuthService>();
 
-  late RxList<Movie> movieList;
-  late RxList<Hall> hallList;
+  RxList<Movie> movieList = <Movie>[].obs;
+  RxList<Hall> hallList = <Hall>[].obs;
   late Movie selectedMovie;
   late Hall selectedHall;
 
   late DateTime startTime;
   late DateTime endTime;
   late Ticket bookedTicket;
+
 
   void selectMovie(Movie movie){
     selectedMovie = movie;
@@ -28,7 +29,7 @@ class HomeController extends GetxController {
 
   void getHallList(){
     hallList.bindStream(_db.getHallStreamWhere('Halls', 'movieIds', selectedMovie.mid).map((list) =>
-        list.docs.map((doc) => Hall.fromJson(doc.data as Map)).toList()));
+        list.docs.map((doc) => Hall.fromJson(doc.data() as Map<String, dynamic>)).toList()));
   }
 
   void bookTicket(int position) async {
@@ -66,10 +67,16 @@ class HomeController extends GetxController {
     }
   }
 
+  void logOut() async {
+    await _auth.logout();
+    Get.offAllNamed('/auth');
+  }
+
   @override
   void onInit() {
     movieList.bindStream(_db.getStream('Movies').map((list) =>
-        list.docs.map((doc) => Movie.fromJson(doc.data as Map)).toList()));
+        list.docs.map((doc) => Movie.fromJson(doc.data() as Map<String, dynamic>)).toList()));
+    print(_auth.currentUser!.uid);
     super.onInit();
   }
 }

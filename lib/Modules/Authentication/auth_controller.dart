@@ -13,23 +13,29 @@ class AuthController extends GetxController{
   TextEditingController phoneController = new TextEditingController();
   TextEditingController otpController = new TextEditingController();
 
+  RxInt screenNum = 1.obs;
+  RxBool showOtp = false.obs;
+
   String uid = '';
+  final formKey_1 = GlobalKey<FormState>();
+  final formKey_2 = GlobalKey<FormState>();
 
   sendOtp() async {
-    await _auth.requestOtpUsingPhoneNumber(phoneController.text);
+    await _auth.requestOtpUsingPhoneNumber('+91' + phoneController.text);
+    showOtp.toggle();
   }
 
   verifyOtp() async {
     uid = (await _auth.signInWithOtp(otpController.text))!;
+    Get.offAllNamed('/movie');
   }
 
   registerUser() async {
     await _db.upsert('Customers/$uid', {
-      'Uid' : uid,
-      'Name' : nameController.text,
-      'Email' : emailController.text,
-      'Phone' : phoneController.text,
-      'Bookings' : {}
+      'uid' : uid,
+      'name' : nameController.text,
+      'email' : emailController.text,
+      'phone' : phoneController.text,
     });
   }
 
