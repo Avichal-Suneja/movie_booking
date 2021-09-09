@@ -1,8 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.avichal.movie_booking">
+
    <application
         android:label="movie_booking"
-        android:icon="@mipmap/ic_launcher">
+       android:usesCleartextTraffic="true"
+        android:icon="@mipmap/ic_launcher"
+       tools:targetApi="m">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

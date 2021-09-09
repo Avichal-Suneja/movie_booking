@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:movie_booking/Models/Hall.dart';
 import 'package:movie_booking/Models/Movie.dart';
@@ -10,6 +11,8 @@ class HomeController extends GetxController {
   AuthService _auth = Get.find<AuthService>();
 
   RxList<Movie> movieList = <Movie>[].obs;
+  RxList<Movie> searchedMovieList = <Movie>[].obs;
+
   RxList<Hall> hallList = <Hall>[].obs;
   late Movie selectedMovie;
   late Hall selectedHall;
@@ -18,9 +21,12 @@ class HomeController extends GetxController {
   late DateTime endTime;
   late Ticket bookedTicket;
 
+  TextEditingController searchController = new TextEditingController();
+
 
   void selectMovie(Movie movie){
     selectedMovie = movie;
+    Get.toNamed('/movieInfo');
   }
 
   void selectHall(Hall hall){
@@ -77,6 +83,15 @@ class HomeController extends GetxController {
     movieList.bindStream(_db.getStream('Movies').map((list) =>
         list.docs.map((doc) => Movie.fromJson(doc.data() as Map<String, dynamic>)).toList()));
     print(_auth.currentUser!.uid);
+
+    searchedMovieList.value = movieList;
+
+    searchController.addListener(() {
+      searchedMovieList.value = movieList.where((movie){
+        return movie.name.toLowerCase().contains(searchController.text.toLowerCase());
+      }).toList();
+    });
+
     super.onInit();
   }
 }
