@@ -379,6 +379,7 @@ Widget showSignUp(AuthController controller) {
                 ),
                 SizedBox(height: 8),
                 controller.showOtp.value? Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
                       padding: const EdgeInsets.fromLTRB(40.0, 0, 0, 0),
@@ -405,7 +406,7 @@ Widget showSignUp(AuthController controller) {
                             cursorColor: Colors.black,
                             cursorHeight: 28.0,
                             validator: (text) =>
-                            text!.isEmpty ? 'Name cannot be empty' : null,
+                            text!.isEmpty ? 'OTP cannot be empty' : null,
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               focusedBorder: OutlineInputBorder(
