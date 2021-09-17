@@ -136,8 +136,9 @@ class MovieListView extends StatelessWidget {
                   height: 420.0,
                   width: 370.0,
                   child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
                     itemCount: controller.searchedMovieList.length,
-                    controller: PageController(viewportFraction: 0.7),
+                    controller: ScrollController(initialScrollOffset: controller.movieList.length/2),
                     itemBuilder: (context, index){
                       return GestureDetector(
                         onTap: (){
@@ -145,6 +146,7 @@ class MovieListView extends StatelessWidget {
                         },
                         child: Container(
                           margin: EdgeInsets.only(right: 5.0),
+                          height: 225.0,
                           width: 300.0,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(30.0),
