@@ -14,8 +14,8 @@ class Movie{
       name: json['name'],
       durationInMinutes: json['duration'],
       posterUrl: json['posterUrl'],
-      genre: '',
-      description: '',
+      genre: json['genre'],
+      description: json['description'],
     );
   }
 }

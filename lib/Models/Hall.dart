@@ -4,8 +4,9 @@ class Hall{
   List seats;
   String matrix;
   String name;
+  String address;
 
-  Hall({required this.hid, required this.movieIds, required this.seats, required this.matrix, required this.name});
+  Hall({required this.hid, required this.movieIds, required this.seats, required this.matrix, required this.name, required this.address});
 
   factory Hall.fromJson(Map json){
     return Hall(
@@ -13,7 +14,8 @@ class Hall{
       movieIds: json['movieIds'],
       seats: json['seats'],
       matrix: json['matrix'],
-      name : json['name']
+      name : json['name'],
+      address: json['address']
     );
   }
 }

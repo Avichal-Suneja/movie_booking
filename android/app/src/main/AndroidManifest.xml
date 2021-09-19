@@ -4,7 +4,7 @@
 
    <application
         android:label="movie_booking"
-       android:usesCleartextTraffic="true"
+        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher"
        tools:targetApi="m">
         <activity

@@ -138,7 +138,6 @@ class MovieListView extends StatelessWidget {
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: controller.searchedMovieList.length,
-                    controller: ScrollController(initialScrollOffset: controller.movieList.length/2),
                     itemBuilder: (context, index){
                       return GestureDetector(
                         onTap: (){
@@ -153,7 +152,7 @@ class MovieListView extends StatelessWidget {
                               // color: Colors.red,
                               image: DecorationImage(
                                   image: NetworkImage(controller.searchedMovieList[index].posterUrl),
-                                  fit: BoxFit.fill
+                                  fit: BoxFit.fill,
                               )
                           ),
                         ),

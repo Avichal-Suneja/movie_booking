@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie_booking/Models/Hall.dart';
 import 'package:movie_booking/Models/Movie.dart';
@@ -14,6 +15,7 @@ class HomeController extends GetxController {
   RxList<Movie> searchedMovieList = <Movie>[].obs;
 
   RxList<Hall> hallList = <Hall>[].obs;
+
   late Movie selectedMovie;
   late Hall selectedHall;
 
@@ -23,30 +25,102 @@ class HomeController extends GetxController {
 
   TextEditingController searchController = new TextEditingController();
 
+  List<String> months = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'June',
+    'July',
+    'Aug',
+    'Sept',
+    'Oct',
+    'Nov',
+    'Dec'
+  ];
 
-  void selectMovie(Movie movie){
+  RxList<DateTime> dates = [DateTime.now(), DateTime.now().add(Duration(days: 1)),
+    DateTime.now().add(Duration(days: 2)),DateTime.now().add(Duration(days: 3)),
+    DateTime.now().add(Duration(days: 4)),DateTime.now().add(Duration(days: 5))].obs;
+  
+  List<TimeOfDay> time = [TimeOfDay(hour: 9, minute: 30), TimeOfDay(hour: 2, minute: 30),
+    TimeOfDay(hour: 5, minute: 30), TimeOfDay(hour: 7, minute: 30)]; 
+
+  List<RxBool> selectedDates = [false.obs,false.obs,false.obs,false.obs,false.obs,false.obs];
+  List<RxBool> selectedTimes = [false.obs,false.obs,false.obs,false.obs];
+
+
+  void selectMovie(Movie movie) async {
     selectedMovie = movie;
+    getHallList();
     Get.toNamed('/movieInfo');
   }
 
   void selectHall(Hall hall){
     selectedHall = hall;
+    Get.toNamed('/seat');
   }
 
-  void getHallList(){
+  void selectDay(DateTime date, bool selected, int index){
+    startTime = date;
+    endTime = date;
+    selectedDates[index].value = selected;
+    for(int i=0; i<selectedDates.length; i++){
+      if(i!=index && selected){
+        selectedDates[i].value = false;
+      }
+    }
+    dates.refresh();
+  }
+  
+  void selectTime(TimeOfDay time, bool selected, int index){
+    print(time);
+    startTime = DateTime(endTime.year, endTime.month, endTime.day, time.hour, time.minute);
+     var end = TimeOfDay(hour: time.hour + (selectedMovie.durationInMinutes/60).floor(), minute: time.minute + (selectedMovie.durationInMinutes%60).round());
+     print(end);
+    endTime = DateTime(startTime.year, startTime.month, startTime.day, end.hour, end.minute);
+
+    print(startTime);
+    print(endTime);
+    selectedTimes[index].value = selected;
+    for(int i=0; i<selectedTimes.length; i++){
+      if(i!=index && selected){
+        selectedTimes[i].value = false;
+      }
+    }
+    dates.refresh();
+  }
+
+  void getHallList() async {
     hallList.bindStream(_db.getHallStreamWhere('Halls', 'movieIds', selectedMovie.mid).map((list) =>
         list.docs.map((doc) => Hall.fromJson(doc.data() as Map<String, dynamic>)).toList()));
   }
 
-  void bookTicket(int position) async {
+  void bookTicket() async {
+
+    int amount = 0;
+    List<int> positions = [];
+    for(int i=0; i<selectedHall.seats.length; i++){
+      if(selectedHall.seats[i]==1){
+        amount++;
+        positions.add(i);
+      }
+    }
+
     await _db.upsert('Tickets/${_auth.currentUser!.uid}', {
       'tid' : _auth.currentUser!.uid,
+      'amount' : amount,
+      'positions' : positions,
       'hid' : selectedHall.hid,
       'mid' : selectedMovie.mid,
       'startTime' : startTime,
       'endTime' : endTime,
     });
-    selectedHall.seats[position] = 1;
+
+    for(var pos in positions){
+      selectedHall.seats[pos] = 2;
+    }
 
     await _db.upsert('Halls/${selectedHall.hid}',{
       'hid' : selectedHall.hid,
@@ -54,6 +128,9 @@ class HomeController extends GetxController {
       'movieIds' : selectedHall.movieIds,
       'seats' : selectedHall.seats
     });
+
+    Get.rawSnackbar(message: 'Tickets are successfully booked!');
+    Get.offAllNamed('/movie');
   }
 
   getBookedTicket() async {
@@ -77,6 +154,7 @@ class HomeController extends GetxController {
     await _auth.logout();
     Get.offAllNamed('/auth');
   }
+
 
   @override
   void onInit() {
