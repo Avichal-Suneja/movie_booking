@@ -1,7 +1,7 @@
 class Hall{
   String hid;
   List movieIds;
-  List seats;
+  Map seats;
   String matrix;
   String name;
   String address;

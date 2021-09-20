@@ -16,15 +16,17 @@ class HomeController extends GetxController {
   RxList<Movie> searchedMovieList = <Movie>[].obs;
 
   RxList<Hall> hallList = <Hall>[].obs;
+  List currentSeats = [];
 
   late Movie selectedMovie;
   late Hall selectedHall;
 
-  late DateTime startTime;
-  late DateTime endTime;
+  DateTime startTime = DateTime.now();
+  DateTime endTime = DateTime.now();
   late Ticket bookedTicket;
 
   TextEditingController searchController = new TextEditingController();
+  int j=0;
 
   List<String> months = [
     'Jan',
@@ -45,11 +47,11 @@ class HomeController extends GetxController {
     DateTime.now().add(Duration(days: 2)),DateTime.now().add(Duration(days: 3)),
     DateTime.now().add(Duration(days: 4)),DateTime.now().add(Duration(days: 5))].obs;
   
-  List<TimeOfDay> time = [TimeOfDay(hour: 9, minute: 30), TimeOfDay(hour: 2, minute: 30),
-    TimeOfDay(hour: 5, minute: 30), TimeOfDay(hour: 7, minute: 30)]; 
+  List<TimeOfDay> time = [TimeOfDay(hour: 2, minute: 30),
+    TimeOfDay(hour: 5, minute: 30), TimeOfDay(hour: 7, minute: 30),TimeOfDay(hour: 9, minute: 30), ];
 
-  List<RxBool> selectedDates = [false.obs,false.obs,false.obs,false.obs,false.obs,false.obs];
-  List<RxBool> selectedTimes = [false.obs,false.obs,false.obs,false.obs];
+  List<RxBool> selectedDates = [true.obs,false.obs,false.obs,false.obs,false.obs,false.obs];
+  List<RxBool> selectedTimes = [true.obs,false.obs,false.obs,false.obs];
 
   RxInt currentIndex = 0.obs;
 
@@ -62,6 +64,7 @@ class HomeController extends GetxController {
 
   void selectHall(Hall hall){
     selectedHall = hall;
+    currentSeats = selectedHall.seats[selectedMovie.mid]['Day-0'][time[0].toString()];
     Get.toNamed('/seat');
   }
 
@@ -74,6 +77,7 @@ class HomeController extends GetxController {
         selectedDates[i].value = false;
       }
     }
+    currentSeats = selectedHall.seats[selectedMovie.mid]['Day-${index.toString()}'][time[0].toString()];
     dates.refresh();
   }
   
@@ -92,6 +96,12 @@ class HomeController extends GetxController {
         selectedTimes[i].value = false;
       }
     }
+
+    for(j=0; j<dates.length; j++){
+      if(dates[j].day == startTime.day)
+        break;
+    }
+    currentSeats = selectedHall.seats[selectedMovie.mid]['Day-${j.toString()}'][time.toString()];
     dates.refresh();
   }
 
@@ -104,8 +114,8 @@ class HomeController extends GetxController {
 
     int amount = 0;
     List<int> positions = [];
-    for(int i=0; i<selectedHall.seats.length; i++){
-      if(selectedHall.seats[i]==1){
+    for(int i=0; i<currentSeats.length; i++){
+      if(currentSeats[i]==1){
         amount++;
         positions.add(i);
       }
@@ -122,14 +132,28 @@ class HomeController extends GetxController {
     });
 
     for(var pos in positions){
-      selectedHall.seats[pos] = 2;
+      currentSeats[pos] = 2;
+    }
+
+    int k=0;
+    for(var bul in selectedTimes){
+      if(bul.value)
+        break;
+      else
+        k++;
     }
 
     await _db.upsert('Halls/${selectedHall.hid}',{
       'hid' : selectedHall.hid,
       'matrix' : selectedHall.matrix,
       'movieIds' : selectedHall.movieIds,
-      'seats' : selectedHall.seats
+      'seats' : {
+        selectedMovie.mid : {
+          'Day-${j.toString()}' : {
+            time[k].toString() : currentSeats
+          }
+        }
+      }
     });
 
     Get.offAllNamed('/movie');
@@ -177,6 +201,7 @@ class HomeController extends GetxController {
         return movie.name.toLowerCase().contains(searchController.text.toLowerCase());
       }).toList();
     });
+
 
     super.onInit();
   }

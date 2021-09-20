@@ -85,7 +85,7 @@ class MovieListView extends StatelessWidget {
                     child: Container(
                       color: Color(0xff9c9c9c),
                       width: Get.width * 0.92,
-                      height: Get.height * 0.07,
+                      height: 48,
                       child: TextField(
                         controller: controller.searchController,
                         cursorColor: Colors.black,
@@ -108,8 +108,6 @@ class MovieListView extends StatelessWidget {
                               BorderRadius.all(Radius.circular(100.0)),
                               borderSide:
                               BorderSide(color: Colors.black26, width: 3.0)),
-                          contentPadding: EdgeInsets.symmetric(
-                              vertical: -13.0, horizontal: 24.0),
                         ),
                       ),
                     ),

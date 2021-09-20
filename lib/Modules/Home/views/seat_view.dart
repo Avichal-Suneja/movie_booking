@@ -71,9 +71,9 @@ class SeatView extends StatelessWidget {
                               showCheckmark: false,
                               label: Text('  '),
                               selectedColor: Color(0xffEFAE28),
-                              selected: controller.selectedHall.seats[5*i + j] == 1? true : false,
-                              onSelected: controller.selectedHall.seats[5*i + j] == 2? null : (value){
-                                controller.selectedHall.seats[5*i + j] = value? 1 : 0;
+                              selected: controller.currentSeats[5*i + j] == 1? true : false,
+                              onSelected: controller.currentSeats[5*i + j] == 2? null : (value){
+                                controller.currentSeats[5*i + j] = value? 1 : 0;
                                 controller.dates.refresh();
                               },
                             ),
