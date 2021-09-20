@@ -164,6 +164,45 @@ class MovieListView extends StatelessWidget {
             ),
           ),
         ),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.grey[800],
+        selectedItemColor: Color(0xffEFAE28),
+        unselectedItemColor: Colors.white,
+        currentIndex: controller.currentIndex.value,
+        onTap: (index) async {
+          switch(index){
+            case 0:
+              if(controller.currentIndex.value!=0)
+                Get.offAllNamed('/movie');
+              break;
+            case 1:
+              if(controller.currentIndex.value!=1){
+                await controller.getBookedTicket();
+                Get.toNamed('/ticket');
+              }
+              break;
+            case 2:
+              if(controller.currentIndex.value!=2)
+                Get.toNamed('/profile');
+              break;
+          }
+          controller.currentIndex.value = index;
+        },
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.airplane_ticket),
+              label: 'Tickets'
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: 'Profile'
+          )
+        ],
+      ),
       ),
     );
   }

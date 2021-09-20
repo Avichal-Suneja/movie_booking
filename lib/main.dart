@@ -6,7 +6,9 @@ import 'package:movie_booking/Modules/Home/bindings/home_bindings.dart';
 import 'package:movie_booking/Modules/Home/views/halls_list_view.dart';
 import 'package:movie_booking/Modules/Home/views/movie_info_view.dart';
 import 'package:movie_booking/Modules/Home/views/movie_list_view.dart';
+import 'package:movie_booking/Modules/Home/views/profile_view.dart';
 import 'package:movie_booking/Modules/Home/views/seat_view.dart';
+import 'package:movie_booking/Modules/Home/views/ticket_info_view.dart';
 import 'package:movie_booking/Services/auth_service.dart';
 
 void main() async {
@@ -28,6 +30,8 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/movieInfo', page: ()=> MovieInfoView(), binding: HomeBinding()),
         GetPage(name: '/hall', page: ()=> HallListView(), binding: HomeBinding()),
         GetPage(name: '/seat', page: ()=> SeatView(), binding: HomeBinding()),
+        GetPage(name: '/ticket', page: ()=> TicketInfoView(), binding: HomeBinding()),
+        GetPage(name: '/profile', page: ()=> ProfileView(), binding: HomeBinding()),
       ],
       initialRoute: initialPath,
     );

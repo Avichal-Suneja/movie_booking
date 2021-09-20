@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -49,6 +50,8 @@ class HomeController extends GetxController {
 
   List<RxBool> selectedDates = [false.obs,false.obs,false.obs,false.obs,false.obs,false.obs];
   List<RxBool> selectedTimes = [false.obs,false.obs,false.obs,false.obs];
+
+  RxInt currentIndex = 0.obs;
 
 
   void selectMovie(Movie movie) async {
@@ -129,8 +132,8 @@ class HomeController extends GetxController {
       'seats' : selectedHall.seats
     });
 
-    Get.rawSnackbar(message: 'Tickets are successfully booked!');
     Get.offAllNamed('/movie');
+    Get.rawSnackbar(message: 'Tickets are successfully booked!');
   }
 
   getBookedTicket() async {
@@ -140,12 +143,17 @@ class HomeController extends GetxController {
       hall = await _db.getData('Halls/${ticket['hid']}');
       movie = await _db.getData('Movies/${ticket['mid']}');
     }
+
     if(hall!=null && movie!=null && ticket!=null){
+      Timestamp start = ticket['startTime'];
+      Timestamp end = ticket['endTime'];
       bookedTicket = new Ticket(
         hallName: hall['name'],
         movieName: movie['name'],
-        startTime: ticket['startTime'],
-        endTime: ticket['endTime']
+        startTime: start.toDate(),
+        endTime: end.toDate(),
+        amount: ticket['amount'],
+        positions: ticket['positions']
       );
     }
   }
