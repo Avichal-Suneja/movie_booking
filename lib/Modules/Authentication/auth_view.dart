@@ -25,14 +25,14 @@ Widget showWelcomePage(AuthController controller) {
   return Container(
     height: Get.height,
     width: Get.width,
-    color: Color(0xff303438),
+    color: Color(0xff2c2e43),
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
           'Welcome',
           style: TextStyle(
-            color: Color(0xffEFAE28),
+            color: Color(0xffffd523),
             fontSize: 48,
             fontWeight: FontWeight.bold,
           ),
@@ -41,7 +41,7 @@ Widget showWelcomePage(AuthController controller) {
           padding: const EdgeInsets.fromLTRB(0, 8.0, 0, 0),
           child: Text(
             'Book Your Favourite Movie Shows Here',
-            style: TextStyle(color: Color(0xff666a6e), fontSize: 18),
+            style: TextStyle(color: Color(0xffb2b1b9), fontSize: 18),
           ),
         ),
         Image(image: AssetImage('assets/welcome_page.png')),
@@ -55,7 +55,7 @@ Widget showWelcomePage(AuthController controller) {
                   controller.screenNum.value = 2;
                 },
                 style: ElevatedButton.styleFrom(
-                    primary: Color(0xffEFAE28), elevation: 10),
+                    primary: Color(0xffffd523), elevation: 10),
                 child: Text(
                   'Get Started',
                   style: TextStyle(
@@ -74,7 +74,7 @@ Widget showSignIn(AuthController controller) {
   return Container(
       height: Get.height,
       width: Get.width,
-      color: Color(0xff303438),
+      color: Color(0xff2c2e43),
       child: Form(
         key: controller.formKey_1,
         child: Column(
@@ -85,7 +85,7 @@ Widget showSignIn(AuthController controller) {
                 child: Text(
                   'Sign-In',
                   style: TextStyle(
-                    color: Color(0xffEFAE28),
+                    color: Color(0xffffd523),
                     fontSize: 48,
                     fontWeight: FontWeight.bold,
                   ),
@@ -97,7 +97,7 @@ Widget showSignIn(AuthController controller) {
                 child: Text(
                   'Phone Number',
                   style: TextStyle(
-                    color: Color(0xff666a6e),
+                    color: Color(0xff595260),
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
                   ),
@@ -108,9 +108,9 @@ Widget showSignIn(AuthController controller) {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(100),
                   child: Container(
-                    color: Color(0xff9c9c9c),
+                    color: Color(0xffb2b1b9),
                     width: Get.width * 0.9,
-                    height: Get.height * 0.07,
+                    height: Get.height * 0.06,
                     child: TextFormField(
                       controller: controller.phoneController,
                       autofocus: true,
@@ -133,14 +133,15 @@ Widget showSignIn(AuthController controller) {
                 ),
               ),
               SizedBox(height: 32),
-              controller.showOtp.value? Column(
+              controller.showOtp.value?
+              Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(40.0, 0, 0, 0),
+                    padding: const EdgeInsets.fromLTRB(8.0, 0, 0, 0),
                     child: Text(
                       'OTP',
                       style: TextStyle(
-                        color: Color(0xff666a6e),
+                        color: Color(0xff595260),
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
                       ),
@@ -151,9 +152,9 @@ Widget showSignIn(AuthController controller) {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(100),
                       child: Container(
-                        color: Color(0xff9c9c9c),
+                        color: Color(0xffb2b1b9),
                         width: Get.width * 0.9,
-                        height: Get.height * 0.07,
+                        height: Get.height * 0.06,
                         child: TextFormField(
                           controller: controller.otpController,
                           autofocus: true,
@@ -194,7 +195,7 @@ Widget showSignIn(AuthController controller) {
                             }
                           },
                           style: ElevatedButton.styleFrom(
-                              primary: Color(0xffEFAE28), elevation: 10),
+                              primary: Color(0xffffd523), elevation: 10),
                           child: Text(
                             !controller.showOtp.value? 'Send Otp' : 'Sign-In',
                             style: TextStyle(
@@ -212,16 +213,16 @@ Widget showSignIn(AuthController controller) {
                 children: [
                   Text('New User',
                       style: TextStyle(
-                          color: Color(0xff666a6e),
+                          color: Color(0xff595260),
                           fontSize: 18,
-                          fontWeight: FontWeight.bold)),
+                          )),
                   TextButton(
                     onPressed: () {
                       controller.screenNum.value = 3;
                     },
                     child: Text('Sign Up',
                         style: TextStyle(
-                          color: Color(0xffEFAE28),
+                          color: Color(0xffffd523),
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         )),
@@ -237,7 +238,7 @@ Widget showSignUp(AuthController controller) {
     child: Container(
         height: Get.height,
         width: Get.width,
-        color: Color(0xff303438),
+        color: Color(0xff2c2e43),
         child: Form(
           key: controller.formKey_2,
           child: Column(
@@ -248,7 +249,7 @@ Widget showSignUp(AuthController controller) {
                   child: Text(
                     'Sign-Up',
                     style: TextStyle(
-                      color: Color(0xffEFAE28),
+                      color: Color(0xffffd523),
                       fontSize: 48,
                       fontWeight: FontWeight.bold,
                     ),
@@ -260,7 +261,7 @@ Widget showSignUp(AuthController controller) {
                   child: Text(
                     'Name',
                     style: TextStyle(
-                      color: Color(0xff666a6e),
+                      color: Color(0xff595260),
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
                     ),
@@ -271,9 +272,9 @@ Widget showSignUp(AuthController controller) {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(100),
                     child: Container(
-                      color: Color(0xff9c9c9c),
+                      color: Color(0xffb2b1b9),
                       width: Get.width * 0.9,
-                      height: Get.height * 0.07,
+                      height: Get.height * 0.06,
                       child: TextFormField(
                         controller: controller.nameController,
                         autofocus: true,
@@ -301,7 +302,7 @@ Widget showSignUp(AuthController controller) {
                   child: Text(
                     'Email',
                     style: TextStyle(
-                      color: Color(0xff666a6e),
+                      color: Color(0xff595260),
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
                     ),
@@ -312,9 +313,9 @@ Widget showSignUp(AuthController controller) {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(100),
                     child: Container(
-                      color: Color(0xff9c9c9c),
+                      color: Color(0xffb2b1b9),
                       width: Get.width * 0.9,
-                      height: Get.height * 0.07,
+                      height: Get.height * 0.06,
                       child: TextFormField(
                         controller: controller.emailController,
                         autofocus: true,
@@ -342,7 +343,7 @@ Widget showSignUp(AuthController controller) {
                   child: Text(
                     'Phone Number',
                     style: TextStyle(
-                      color: Color(0xff666a6e),
+                      color: Color(0xff595260),
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
                     ),
@@ -353,9 +354,9 @@ Widget showSignUp(AuthController controller) {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(100),
                     child: Container(
-                      color: Color(0xff9c9c9c),
+                      color: Color(0xffb2b1b9),
                       width: Get.width * 0.9,
-                      height: Get.height * 0.07,
+                      height: Get.height * 0.06,
                       child: TextFormField(
                         controller: controller.phoneController,
                         autofocus: true,
@@ -386,7 +387,7 @@ Widget showSignUp(AuthController controller) {
                       child: Text(
                         'OTP',
                         style: TextStyle(
-                          color: Color(0xff666a6e),
+                          color: Color(0xff595260),
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
                         ),
@@ -397,9 +398,9 @@ Widget showSignUp(AuthController controller) {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(100),
                         child: Container(
-                          color: Color(0xff9c9c9c),
+                          color: Color(0xffb2b1b8),
                           width: Get.width * 0.9,
-                          height: Get.height * 0.07,
+                          height: Get.height * 0.06,
                           child: TextFormField(
                             controller: controller.otpController,
                             autofocus: true,
@@ -443,7 +444,7 @@ Widget showSignUp(AuthController controller) {
                               }
                             },
                             style: ElevatedButton.styleFrom(
-                                primary: Color(0xffEFAE28), elevation: 10),
+                                primary: Color(0xffffd523), elevation: 10),
                             child: Text(
                               !controller.showOtp.value? 'Send Otp' : 'Sign-Up',
                               style: TextStyle(
@@ -460,16 +461,16 @@ Widget showSignUp(AuthController controller) {
                   children: [
                     Text('Already have an account',
                         style: TextStyle(
-                            color: Color(0xff666a6e),
+                            color: Color(0xff595260),
                             fontSize: 18,
-                            fontWeight: FontWeight.bold)),
+                          )),
                     TextButton(
                       onPressed: () {
                         controller.screenNum.value = 2;
                       },
                       child: Text('Sign In',
                           style: TextStyle(
-                            color: Color(0xffEFAE28),
+                            color: Color(0xffffd523),
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           )),

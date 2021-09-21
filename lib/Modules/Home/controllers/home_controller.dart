@@ -192,7 +192,7 @@ class HomeController extends GetxController {
   void onInit() {
     movieList.bindStream(_db.getStream('Movies').map((list) =>
         list.docs.map((doc) => Movie.fromJson(doc.data() as Map<String, dynamic>)).toList()));
-    print(_auth.currentUser!.uid);
+    // print(_auth.currentUser!.uid);
 
     searchedMovieList.value = movieList;
 

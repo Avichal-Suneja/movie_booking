@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/ticket', page: ()=> TicketInfoView(), binding: HomeBinding()),
         GetPage(name: '/profile', page: ()=> ProfileView(), binding: HomeBinding()),
       ],
-      initialRoute: initialPath,
+      initialRoute: '/movie',
     );
   }
 }

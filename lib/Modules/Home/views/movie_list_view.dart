@@ -12,7 +12,7 @@ class MovieListView extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.find<HomeController>();
     return Obx(()=>Scaffold(
-      backgroundColor:  Color(0xff303438),
+      backgroundColor:  Color(0xff2c2e43),
         body: SafeArea(
           child: Container(
             height: Get.height,
@@ -25,14 +25,14 @@ class MovieListView extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(top: 16.0, left: 16.0),
                       child: Text('Hello', style: TextStyle(
-                        color: Color(0xff666a6e),
+                        color: Color(0xff595260),
                         fontSize: 24.0,
                       ),),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 16.0, left: 8.0),
                       child: Text('Kunal', style: TextStyle(
-                        color: Color(0xffEFAE28),
+                        color: Color(0xffffd523),
                         fontSize: 24.0,
                         fontWeight: FontWeight.bold
                       ),),
@@ -40,14 +40,14 @@ class MovieListView extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(top: 16.0),
                       child: Text('!', style: TextStyle(
-                        color: Color(0xff666a6e),
+                        color: Color(0xff595260),
                         fontSize: 24.0,
                       ),),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 16.0, left: 56.0),
                       child: Text('S',style: TextStyle(
-                        color: Color(0xffEFAE28),
+                        color: Color(0xffffd523),
                         fontSize: 40,
                         fontWeight: FontWeight.bold
                       ),),
@@ -55,7 +55,7 @@ class MovieListView extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(top: 16.0),
                       child: Text('HOW',style: TextStyle(
-                          color: Color(0xff666a6e),
+                          color: Color(0xff595260),
                           fontSize: 32,
                           fontWeight: FontWeight.bold
                       ),),
@@ -63,7 +63,7 @@ class MovieListView extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(top: 16.0),
                       child: Text('B',style: TextStyle(
-                          color: Color(0xffEFAE28),
+                          color: Color(0xffffd523),
                           fontSize: 40,
                           fontWeight: FontWeight.bold
                       ),),
@@ -71,7 +71,7 @@ class MovieListView extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(top: 16.0),
                       child: Text('UZZ',style: TextStyle(
-                          color: Color(0xff666a6e),
+                          color: Color(0xff595260),
                           fontSize: 32,
                           fontWeight: FontWeight.bold
                       ),),
@@ -83,7 +83,7 @@ class MovieListView extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(100),
                     child: Container(
-                      color: Color(0xff9c9c9c),
+                      color: Color(0xffb2b1b9),
                       width: Get.width * 0.92,
                       height: 48,
                       child: TextField(
@@ -95,7 +95,7 @@ class MovieListView extends StatelessWidget {
                             padding: EdgeInsets.only(left: 8.0),
                             child: Icon(
                               Icons.search,
-                              color: Color(0xffEFAE28),
+                              color: Color(0xffffd523),
                             ),),
                           hintText: 'Search',
                           hintStyle: TextStyle(
@@ -117,13 +117,13 @@ class MovieListView extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 16.0, left: 16.0),
                   child: RichText(text: TextSpan(text: 'Featured ',
                     style: TextStyle(
-                        color: Color(0xffEFAE28),
+                        color: Color(0xffffd523),
                         fontSize: 24.0,
                         fontWeight: FontWeight.bold
                     ),
                     children: const <TextSpan>[
                     TextSpan(text: 'Movies', style: TextStyle(
-                        color: Color(0xff666a6e),
+                        color: Color(0xff595260),
                         fontSize: 24.0,
                         )),
                    ],
@@ -162,44 +162,52 @@ class MovieListView extends StatelessWidget {
             ),
           ),
         ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.grey[800],
-        selectedItemColor: Color(0xffEFAE28),
-        unselectedItemColor: Colors.white,
-        currentIndex: controller.currentIndex.value,
-        onTap: (index) async {
-          switch(index){
-            case 0:
-              if(controller.currentIndex.value!=0)
-                Get.offAllNamed('/movie');
-              break;
-            case 1:
-              if(controller.currentIndex.value!=1){
-                await controller.getBookedTicket();
-                Get.toNamed('/ticket');
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.fromLTRB(8.0,0,8.0,16.0),
+        child: ClipRRect(
+          borderRadius: BorderRadius.all(Radius.circular(30.0)),
+          child: BottomNavigationBar(
+            backgroundColor: Color(0xff595260),
+            selectedItemColor: Color(0xffffd523),
+            unselectedItemColor: Colors.white,
+            elevation: 50.0,
+            type: BottomNavigationBarType.fixed,
+            currentIndex: controller.currentIndex.value,
+            onTap: (index) async {
+              switch(index){
+                case 0:
+                  if(controller.currentIndex.value!=0)
+                    Get.offAllNamed('/movie');
+                  break;
+                case 1:
+                  if(controller.currentIndex.value!=1){
+                    await controller.getBookedTicket();
+                    Get.toNamed('/ticket');
+                  }
+                  break;
+                case 2:
+                  if(controller.currentIndex.value!=2)
+                    Get.toNamed('/profile');
+                  break;
               }
-              break;
-            case 2:
-              if(controller.currentIndex.value!=2)
-                Get.toNamed('/profile');
-              break;
-          }
-          controller.currentIndex.value = index;
-        },
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+              controller.currentIndex.value = index;
+            },
+            items: [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: 'Home',
+              ),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.airplane_ticket),
+                  label: 'Tickets'
+              ),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.person),
+                  label: 'Profile'
+              )
+            ],
           ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.airplane_ticket),
-              label: 'Tickets'
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'Profile'
-          )
-        ],
+        ),
       ),
       ),
     );
