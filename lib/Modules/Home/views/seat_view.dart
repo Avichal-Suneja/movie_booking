@@ -18,7 +18,7 @@ class SeatView extends StatelessWidget {
             onPressed: Get.back,
           ),
         ),
-        backgroundColor: Color(0xff303438),
+        backgroundColor: Color(0xff2c2e43),
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -30,7 +30,7 @@ class SeatView extends StatelessWidget {
                   children: [
                     for(var index=0; index<controller.dates.length; index++)
                       FilterChip(
-                      backgroundColor: Colors.grey[800],
+                      backgroundColor: Color(0xff595260),
                       label: Column(
                         children: [
                           Text(
@@ -45,7 +45,7 @@ class SeatView extends StatelessWidget {
                       ),
                       showCheckmark: false,
                       selected: controller.selectedDates[index].value,
-                      selectedColor: Color(0xffEFAE28),
+                      selectedColor: Color(0xffffd523),
                       onSelected: (value){
                         controller.selectDay(controller.dates[index], value, index);
                       },
@@ -67,10 +67,10 @@ class SeatView extends StatelessWidget {
                             padding: const EdgeInsets.all(8.0),
                             child: FilterChip(
                               disabledColor: Colors.white,
-                              backgroundColor: Colors.grey[800],
+                              backgroundColor: Color(0xff595260),
                               showCheckmark: false,
                               label: Text('  '),
-                              selectedColor: Color(0xffEFAE28),
+                              selectedColor: Color(0xffffd523),
                               selected: controller.currentSeats[5*i + j] == 1? true : false,
                               onSelected: controller.currentSeats[5*i + j] == 2? null : (value){
                                 controller.currentSeats[5*i + j] = value? 1 : 0;
@@ -84,7 +84,7 @@ class SeatView extends StatelessWidget {
               ),
               SizedBox(height: 16),
               Container(
-                color: Colors.grey[800],
+                color: Color(0xff595260),
                 width: Get.width*0.8,
                 height: 50,
                 child: Center(
@@ -101,7 +101,7 @@ class SeatView extends StatelessWidget {
                   Row(
                     children: [
                       CircleAvatar(
-                        backgroundColor: Colors.grey[800],
+                        backgroundColor: Color(0xff595260),
                         radius: 12,
                       ),
                       SizedBox(width: 4),
@@ -111,7 +111,7 @@ class SeatView extends StatelessWidget {
                   Row(
                     children: [
                       CircleAvatar(
-                        backgroundColor: Color(0xffEFAE28),
+                        backgroundColor: Color(0xffffd523),
                         radius: 12,
                       ),
                       SizedBox(width: 4),
@@ -138,14 +138,14 @@ class SeatView extends StatelessWidget {
                   children: [
                     for(var index=0; index<controller.time.length; index++)
                       FilterChip(
-                        backgroundColor: Colors.grey[800],
+                        backgroundColor: Color(0xff595260),
                         label: Text(
                           '${controller.time[index].hour}:${controller.time[index].minute} P.M',
                           style: TextStyle(color: Colors.white, fontSize: 16),
                         ),
                         showCheckmark: false,
                         selected: controller.selectedTimes[index].value,
-                        selectedColor: Color(0xffEFAE28),
+                        selectedColor: Color(0xffffd523),
                         onSelected: (value){
                           controller.selectTime(controller.time[index], value, index);
                         },
@@ -167,7 +167,7 @@ class SeatView extends StatelessWidget {
                             controller.bookTicket();
                           },
                           style: ElevatedButton.styleFrom(
-                              primary: Color(0xffEFAE28), elevation: 10),
+                              primary: Color(0xffffd523), elevation: 10),
                           child: Text('Book Tickets',
                             style: TextStyle(
                                 color: Colors.black,

@@ -18,7 +18,7 @@ class HallListView extends StatelessWidget {
           onPressed: Get.back,
         ),
       ),
-      backgroundColor: Color(0xff303438),
+      backgroundColor: Color(0xff2c2e43),
       body: ListView.builder(
         itemCount: controller.hallList.length,
         itemBuilder: (context, index){
@@ -26,7 +26,7 @@ class HallListView extends StatelessWidget {
             onTap:(){
               controller.selectHall(controller.hallList[index]);
             },
-            title: Text(controller.hallList[index].name, style: TextStyle(color: Colors.white)),
+            title: Text(controller.hallList[index].name, style: TextStyle(color: Color(0xffffd523))),
             subtitle: Text(controller.hallList[index].address, style: TextStyle(color: Colors.white)),
             leading: Icon(Icons.tv, color: Colors.white),
           );

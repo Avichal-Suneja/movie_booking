@@ -23,7 +23,12 @@ class HomeController extends GetxController {
 
   DateTime startTime = DateTime.now();
   DateTime endTime = DateTime.now();
-  late Ticket bookedTicket;
+  Ticket bookedTicket = new Ticket(hallName: 'no', startTime: DateTime.now(), endTime: DateTime.now(), movieName: '', amount: 0, positions: []);
+  late String uid;
+  String userName = '';
+  String userEmail = '';
+  String userPhone = '';
+
 
   TextEditingController searchController = new TextEditingController();
   int j=0;
@@ -111,53 +116,57 @@ class HomeController extends GetxController {
   }
 
   void bookTicket() async {
-
-    int amount = 0;
-    List<int> positions = [];
-    for(int i=0; i<currentSeats.length; i++){
-      if(currentSeats[i]==1){
-        amount++;
-        positions.add(i);
-      }
-    }
-
-    await _db.upsert('Tickets/${_auth.currentUser!.uid}', {
-      'tid' : _auth.currentUser!.uid,
-      'amount' : amount,
-      'positions' : positions,
-      'hid' : selectedHall.hid,
-      'mid' : selectedMovie.mid,
-      'startTime' : startTime,
-      'endTime' : endTime,
-    });
-
-    for(var pos in positions){
-      currentSeats[pos] = 2;
-    }
-
-    int k=0;
-    for(var bul in selectedTimes){
-      if(bul.value)
-        break;
-      else
-        k++;
-    }
-
-    await _db.upsert('Halls/${selectedHall.hid}',{
-      'hid' : selectedHall.hid,
-      'matrix' : selectedHall.matrix,
-      'movieIds' : selectedHall.movieIds,
-      'seats' : {
-        selectedMovie.mid : {
-          'Day-${j.toString()}' : {
-            time[k].toString() : currentSeats
-          }
+    if(bookedTicket.hallName!='no'){
+      Get.offAllNamed('/movie');
+      Get.rawSnackbar(message: 'Can not Book Another Ticket, while one is already pending!', duration: Duration(seconds: 5));
+    }else{
+      int amount = 0;
+      List<int> positions = [];
+      for(int i=0; i<currentSeats.length; i++){
+        if(currentSeats[i]==1){
+          amount++;
+          positions.add(i);
         }
       }
-    });
 
-    Get.offAllNamed('/movie');
-    Get.rawSnackbar(message: 'Tickets are successfully booked!');
+      await _db.upsert('Tickets/${_auth.currentUser!.uid}', {
+        'tid' : _auth.currentUser!.uid,
+        'amount' : amount,
+        'positions' : positions,
+        'hid' : selectedHall.hid,
+        'mid' : selectedMovie.mid,
+        'startTime' : startTime,
+        'endTime' : endTime,
+      });
+
+      for(var pos in positions){
+        currentSeats[pos] = 2;
+      }
+
+      int k=0;
+      for(var bul in selectedTimes){
+        if(bul.value)
+          break;
+        else
+          k++;
+      }
+
+      await _db.upsert('Halls/${selectedHall.hid}',{
+        'hid' : selectedHall.hid,
+        'matrix' : selectedHall.matrix,
+        'movieIds' : selectedHall.movieIds,
+        'seats' : {
+          selectedMovie.mid : {
+            'Day-${j.toString()}' : {
+              time[k].toString() : currentSeats
+            }
+          }
+        }
+      });
+
+      Get.offAllNamed('/movie');
+      Get.rawSnackbar(message: 'Tickets are successfully booked!');
+    }
   }
 
   getBookedTicket() async {
@@ -189,10 +198,15 @@ class HomeController extends GetxController {
 
 
   @override
-  void onInit() {
+  void onInit() async {
     movieList.bindStream(_db.getStream('Movies').map((list) =>
         list.docs.map((doc) => Movie.fromJson(doc.data() as Map<String, dynamic>)).toList()));
-    // print(_auth.currentUser!.uid);
+    
+    uid = _auth.currentUser!.uid;
+    Map<String, dynamic>? data = await _db.getData('Customers/$uid');
+    userName = data!['name'];
+    userEmail = data['email'];
+    userPhone = data['phone'];
 
     searchedMovieList.value = movieList;
 

@@ -18,67 +18,77 @@ class MovieListView extends StatelessWidget {
             height: Get.height,
             width: Get.width,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 16.0, left: 16.0),
-                      child: Text('Hello', style: TextStyle(
-                        color: Color(0xff595260),
-                        fontSize: 24.0,
-                      ),),
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 16.0, left: 16.0),
+                          child: Text('Hello', style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 24.0,
+                          ),),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 16.0, left: 8.0),
+                          child: Text('${controller.userName}', style: TextStyle(
+                              color: Color(0xffffd523),
+                              fontSize: 24.0,
+                              fontWeight: FontWeight.bold
+                          ),),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 16.0),
+                          child: Text('!', style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 24.0,
+                          ),),
+                        ),
+                      ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 16.0, left: 8.0),
-                      child: Text('Kunal', style: TextStyle(
-                        color: Color(0xffffd523),
-                        fontSize: 24.0,
-                        fontWeight: FontWeight.bold
-                      ),),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 16.0),
-                      child: Text('!', style: TextStyle(
-                        color: Color(0xff595260),
-                        fontSize: 24.0,
-                      ),),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 16.0, left: 56.0),
-                      child: Text('S',style: TextStyle(
-                        color: Color(0xffffd523),
-                        fontSize: 40,
-                        fontWeight: FontWeight.bold
-                      ),),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 16.0),
-                      child: Text('HOW',style: TextStyle(
-                          color: Color(0xff595260),
-                          fontSize: 32,
-                          fontWeight: FontWeight.bold
-                      ),),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 16.0),
-                      child: Text('B',style: TextStyle(
-                          color: Color(0xffffd523),
-                          fontSize: 40,
-                          fontWeight: FontWeight.bold
-                      ),),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 16.0),
-                      child: Text('UZZ',style: TextStyle(
-                          color: Color(0xff595260),
-                          fontSize: 32,
-                          fontWeight: FontWeight.bold
-                      ),),
-                    ),
+                   Row(
+                     children: [
+                       Padding(
+                         padding: const EdgeInsets.only(top: 16.0, left: 56.0),
+                         child: Text('S',style: TextStyle(
+                             color: Color(0xffffd523),
+                             fontSize: 40,
+                             fontWeight: FontWeight.bold
+                         ),),
+                       ),
+                       Padding(
+                         padding: const EdgeInsets.only(top: 16.0),
+                         child: Text('HOW',style: TextStyle(
+                             color: Colors.white,
+                             fontSize: 32,
+                             fontWeight: FontWeight.bold
+                         ),),
+                       ),
+                       Padding(
+                         padding: const EdgeInsets.only(top: 16.0),
+                         child: Text('B',style: TextStyle(
+                             color: Color(0xffffd523),
+                             fontSize: 40,
+                             fontWeight: FontWeight.bold
+                         ),),
+                       ),
+                       Padding(
+                         padding: const EdgeInsets.only(top: 16.0),
+                         child: Text('UZZ',style: TextStyle(
+                             color: Colors.white,
+                             fontSize: 32,
+                             fontWeight: FontWeight.bold
+                         ),),
+                       ),
+                     ],
+                   )
                   ],
                 ),
-                SizedBox(height: 32.0,),
+                //SizedBox(height: 32.0,),
                 Center(
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(100),
@@ -123,7 +133,7 @@ class MovieListView extends StatelessWidget {
                     ),
                     children: const <TextSpan>[
                     TextSpan(text: 'Movies', style: TextStyle(
-                        color: Color(0xff595260),
+                        color: Colors.white,
                         fontSize: 24.0,
                         )),
                    ],

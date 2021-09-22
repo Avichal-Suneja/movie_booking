@@ -30,7 +30,7 @@ class ProfileView extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 16.0,),
                     child: Text('ROFILE', style: TextStyle(
-                        color: Color(0xff595260),
+                        color: Colors.white,
                         fontSize: 24.0,
                         fontWeight: FontWeight.bold
                     ),),
@@ -46,7 +46,7 @@ class ProfileView extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 16.0,),
                     child: Text('IEW', style: TextStyle(
-                        color: Color(0xff595260),
+                        color: Colors.white,
                         fontSize: 24.0,
                         fontWeight: FontWeight.bold
                     ),),
@@ -68,7 +68,7 @@ class ProfileView extends StatelessWidget {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(left: 16.0),
-                        child: Text('NAME :', style: TextStyle(
+                        child: Text('Name : ${controller.userName}', style: TextStyle(
                           color: Color(0xffffd523),
                           fontSize: 20.0,
                           fontWeight: FontWeight.bold
@@ -79,7 +79,7 @@ class ProfileView extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 16.0),
-                        child: Text('EMAIL :', style: TextStyle(
+                        child: Text('Email : ${controller.userEmail}', style: TextStyle(
                             color: Color(0xffffd523),
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold
@@ -90,7 +90,7 @@ class ProfileView extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 16.0),
-                        child: Text('PHONE NUMBER :', style: TextStyle(
+                        child: Text('Phone Number : ${controller.userPhone}', style: TextStyle(
                             color: Color(0xffffd523),
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold
@@ -107,7 +107,9 @@ class ProfileView extends StatelessWidget {
                   height: 64,
                   width: 250,
                   child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        controller.logOut();
+                      },
                       style: ElevatedButton.styleFrom(
                           primary: Color(0xffffd523), elevation: 10),
                       child: Text(

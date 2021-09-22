@@ -18,48 +18,63 @@ class MovieInfoView extends StatelessWidget {
           onPressed: Get.back,
         ),
       ),
-      backgroundColor: Color(0xff303438),
+      backgroundColor: Color(0xff2c2e43),
       body: SingleChildScrollView(
         child: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SizedBox(height: 10),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Image(
-                    image: NetworkImage(controller.selectedMovie.posterUrl),
-                    width: 280,
-                    height: 350,
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Container(
+                      height: 332.5,
+                      width: 266,
+                      decoration: BoxDecoration(
+                        image:  DecorationImage(
+                          image: NetworkImage(controller.selectedMovie.posterUrl),
+                          fit: BoxFit.cover
+                        )
+                      ),
+                    ),
                   ),
                   Column(
                     children: [
-                      Container(
-                        color: Color(0xff272833),
-                        height: 100,
-                        width: 100,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.photo_camera_front, color: Colors.white),
-                            Text('Genre', style: TextStyle(color: Colors.white)),
-                            Text(controller.selectedMovie.genre,style: TextStyle(color: Colors.white))
-                          ],
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Container(
+                          color: Color(0xff595260),
+                          height: 100,
+                          width: 100,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.photo_camera_front, color: Colors.white),
+                              Text('Genre', style: TextStyle(color: Colors.white)),
+                              Text(controller.selectedMovie.genre,style: TextStyle(color: Colors.white))
+                            ],
+                          ),
                         ),
                       ),
                       SizedBox(height: 32),
-                      Container(
-                        color: Color(0xff272833),
-                        height: 100,
-                        width: 100,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.access_time,color: Colors.white),
-                            Text('Duration',style: TextStyle(color: Colors.white)),
-                            Text(controller.selectedMovie.durationInMinutes.toString() + 'm',
-                                style: TextStyle(color: Colors.white))
-                          ],
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Container(
+                          color: Color(0xff595260),
+                          height: 100,
+                          width: 100,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.access_time,color: Colors.white),
+                              Text('Duration',style: TextStyle(color: Colors.white)),
+                              Text(controller.selectedMovie.durationInMinutes.toString() + 'm',
+                                  style: TextStyle(color: Colors.white))
+                            ],
+                          ),
                         ),
                       )
                     ],
@@ -67,36 +82,49 @@ class MovieInfoView extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 32),
-              Text(
-                controller.selectedMovie.description,
-                style: TextStyle(
-                  fontSize: 16,
-                  letterSpacing: 1.25,
-                  color: Colors.white
-                ),
-                textAlign: TextAlign.center,
-              ),
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 32.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(100),
-                    child: SizedBox(
-                      height: 64,
-                      width: 350,
-                      child: ElevatedButton(
-                          onPressed: () {
-                            Get.toNamed('/hall');
-                          },
-                          style: ElevatedButton.styleFrom(
-                              primary: Color(0xffEFAE28), elevation: 10),
-                          child: Text(
-                            'Get Reservation',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold),
-                          )),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Container(
+                  color: Color(0xff383b59),
+                  child: Padding(
+                    padding: EdgeInsets.all(16),
+                    child: Column(
+                      children: [
+                        Text(
+                          controller.selectedMovie.description,
+                          style: TextStyle(
+                            fontSize: 16,
+                            letterSpacing: 1.25,
+                            color: Colors.white
+                          ),
+                          textAlign: TextAlign.justify,
+                        ),
+                        Center(
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 32.0),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(100),
+                              child: SizedBox(
+                                height: 64,
+                                width: 350,
+                                child: ElevatedButton(
+                                    onPressed: () {
+                                      Get.toNamed('/hall');
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                        primary: Color(0xffffd523), elevation: 10),
+                                    child: Text(
+                                      'Get Reservation',
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.bold),
+                                    )),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
