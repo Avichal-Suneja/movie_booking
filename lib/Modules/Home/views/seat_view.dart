@@ -86,7 +86,7 @@ class SeatView extends StatelessWidget {
               Container(
                 color: Color(0xff595260),
                 width: Get.width*0.8,
-                height: 50,
+                height: 30,
                 child: Center(
                   child: Text(
                     'Screen',
@@ -153,10 +153,10 @@ class SeatView extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 16),
+              SizedBox(height: 8),
               Center(
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 40.0),
+                  padding: const EdgeInsets.only(top: 16.0),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(100),
                     child: SizedBox(

@@ -27,57 +27,48 @@ class MovieListView extends StatelessWidget {
                     Row(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(top: 16.0, left: 16.0),
+                          padding: const EdgeInsets.only(top: 0.0, left: 16.0),
                           child: Text('Hello', style: TextStyle(
                             color: Colors.white,
                             fontSize: 24.0,
                           ),),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 16.0, left: 8.0),
+                          padding: const EdgeInsets.only(top: 0.0, left: 8.0),
                           child: Text('${controller.userName}', style: TextStyle(
                               color: Color(0xffffd523),
                               fontSize: 24.0,
                               fontWeight: FontWeight.bold
                           ),),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 16.0),
-                          child: Text('!', style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 24.0,
-                          ),),
-                        ),
+                        Text('!', style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 24.0,
+                        ),),
                       ],
                     ),
                    Row(
                      children: [
                        Padding(
-                         padding: const EdgeInsets.only(top: 16.0, left: 56.0),
+                         padding: const EdgeInsets.only(top: 0.0, left: 48.0),
                          child: Text('S',style: TextStyle(
                              color: Color(0xffffd523),
                              fontSize: 40,
                              fontWeight: FontWeight.bold
                          ),),
                        ),
+                       Text('HOW',style: TextStyle(
+                           color: Colors.white,
+                           fontSize: 32,
+                           fontWeight: FontWeight.bold
+                       ),),
+                       Text('B',style: TextStyle(
+                           color: Color(0xffffd523),
+                           fontSize: 40,
+                           fontWeight: FontWeight.bold
+                       ),),
                        Padding(
-                         padding: const EdgeInsets.only(top: 16.0),
-                         child: Text('HOW',style: TextStyle(
-                             color: Colors.white,
-                             fontSize: 32,
-                             fontWeight: FontWeight.bold
-                         ),),
-                       ),
-                       Padding(
-                         padding: const EdgeInsets.only(top: 16.0),
-                         child: Text('B',style: TextStyle(
-                             color: Color(0xffffd523),
-                             fontSize: 40,
-                             fontWeight: FontWeight.bold
-                         ),),
-                       ),
-                       Padding(
-                         padding: const EdgeInsets.only(top: 16.0),
+                         padding: const EdgeInsets.only(right: 8.0),
                          child: Text('UZZ',style: TextStyle(
                              color: Colors.white,
                              fontSize: 32,
@@ -124,7 +115,7 @@ class MovieListView extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 16.0, left: 16.0),
+                  padding: const EdgeInsets.only(top: 8.0, left: 16.0),
                   child: RichText(text: TextSpan(text: 'Featured ',
                     style: TextStyle(
                         color: Color(0xffffd523),
@@ -140,7 +131,7 @@ class MovieListView extends StatelessWidget {
                   ),),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 20.0, left: 16.0, right: 20.0),
+                  margin: EdgeInsets.only(top: 4.0, left: 16.0, right: 20.0),
                   height: 420.0,
                   width: 370.0,
                   child: ListView.builder(
@@ -152,9 +143,9 @@ class MovieListView extends StatelessWidget {
                           controller.selectMovie(controller.searchedMovieList[index]);
                         },
                         child: Container(
-                          margin: EdgeInsets.only(right: 5.0),
-                          height: 225.0,
-                          width: 300.0,
+                          margin: EdgeInsets.only(right: 10.0),
+                          height: 240.0,
+                          width: 280.0,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(30.0),
                               // color: Colors.red,

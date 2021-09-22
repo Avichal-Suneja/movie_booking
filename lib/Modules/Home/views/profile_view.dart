@@ -60,41 +60,74 @@ class ProfileView extends StatelessWidget {
                 borderRadius: BorderRadius.all(Radius.circular(20.0)),
                 child: Container(
                   padding: EdgeInsets.only(top: 24.0),
-                  height: Get.height * 0.5,
+                  height: Get.height * 0.48,
                   width: Get.width * 0.9,
                   color: Color(0xff383b59),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 16.0),
-                        child: Text('Name : ${controller.userName}', style: TextStyle(
-                          color: Color(0xffffd523),
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold
-                        ),),
+                        padding: const EdgeInsets.only(left: 16.0, top: 48.0),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                          child: Container(
+                            height: Get.height * 0.07,
+                            width: Get.width * 0.8,
+                            color: Color(0xff424669),
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 16.0, top: 16.0),
+                              child: Text('Name : ${controller.userName}', style: TextStyle(
+                                color: Color(0xffffd523),
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold
+                              ),),
+                            ),
+                          ),
+                        ),
                       ),
                       SizedBox(
                         height: 32.0,
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 16.0),
-                        child: Text('Email : ${controller.userEmail}', style: TextStyle(
-                            color: Color(0xffffd523),
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold
-                        ),),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                          child: Container(
+                            height: Get.height * 0.07,
+                            width: Get.width * 0.8,
+                            color: Color(0xff424669),
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 16.0, top: 16.0),
+                              child: Text('Email : ${controller.userEmail}', style: TextStyle(
+                                  color: Color(0xffffd523),
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.bold
+                              ),),
+                            ),
+                          ),
+                        ),
                       ),
                       SizedBox(
                         height: 32.0,
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 16.0),
-                        child: Text('Phone Number : ${controller.userPhone}', style: TextStyle(
-                            color: Color(0xffffd523),
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold
-                        ),),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                          child: Container(
+                            height: Get.height * 0.07,
+                            width: Get.width * 0.8,
+                            color: Color(0xff424669),
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 16.0, top: 16.0),
+                              child: Text('Phone Number : ${controller.userPhone}', style: TextStyle(
+                                  color: Color(0xffffd523),
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.bold
+                              ),),
+                            ),
+                          ),
+                        ),
                       ),
                     ],
                   ),
