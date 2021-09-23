@@ -165,7 +165,7 @@ class HomeController extends GetxController {
       });
 
       Get.offAllNamed('/movie');
-      Get.rawSnackbar(message: 'Tickets are successfully booked!');
+      showDialog();
     }
   }
 
@@ -196,6 +196,41 @@ class HomeController extends GetxController {
     Get.offAllNamed('/auth');
   }
 
+  showDialog() {
+    return Get.defaultDialog(
+      title: '',
+      barrierDismissible: true,
+      backgroundColor: Color(0xff2c2e43),
+        content: Container(
+          color: Color(0xff2c2e43),
+          child: Column(
+            children: [
+              Icon(Icons.check_circle, color: Colors.green, size: 104.0,),
+              Padding(
+                padding: const EdgeInsets.only(top: 16.0),
+                child: Center(
+                  child: Text('YaY', style: TextStyle(
+                    color: Color(0xffffd523),
+                    fontSize: 24.0,
+                    fontWeight: FontWeight.bold
+                  ),),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 16.0, bottom: 32),
+                child: Center(
+                  child: Text('Ticket is Successfully Booked!!', style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16.0,
+                  ),),
+                ),
+              )
+            ],
+          ),
+        ),
+    );
+  }
+
 
   @override
   void onInit() async {
@@ -215,7 +250,6 @@ class HomeController extends GetxController {
         return movie.name.toLowerCase().contains(searchController.text.toLowerCase());
       }).toList();
     });
-
 
     super.onInit();
   }

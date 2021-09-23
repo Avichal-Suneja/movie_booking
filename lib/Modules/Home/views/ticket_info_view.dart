@@ -70,7 +70,7 @@ class TicketInfoView extends StatelessWidget {
                           ),
                           Padding(
                             padding: const EdgeInsets.only(left: 16.0),
-                            child: Text('${controller.bookedTicket.endTime.day} ${controller.months[controller.bookedTicket.endTime.month]}, ${controller.bookedTicket.endTime.hour}:${controller.bookedTicket.endTime.minute}0 PM', style: TextStyle(
+                            child: Text('${controller.bookedTicket.endTime.day} ${controller.months[controller.bookedTicket.endTime.month]}, ${controller.bookedTicket.endTime.hour}:${controller.bookedTicket.endTime.minute} PM', style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 20.0,
                                 fontWeight: FontWeight.bold
