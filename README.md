@@ -1,6 +1,6 @@
 # movie_booking
 
-A new Flutter application.
+This project is a sample movie ticket booking android application with complete frontend and backend. Firebase has been used as backend, storing the data in cloud firestore and phone authentication has been used as a means to log in and sign up. The frontend is made with dart and flutter framework. The application can show movies halls and book tickets, syncing the data through all the devices in real time.
 
 ## Getting Started
 
